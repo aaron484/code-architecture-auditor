@@ -29,17 +29,23 @@ EFFORT:         <1 hour | 1 day | 1 week>
 Order findings by severity (CRITICAL first), then by effort (quick wins first
 within a severity).
 
-## 3C · Files recommended for removal
+## 3C · Files recommended for retirement
 
-One block per file:
+One block per file. Default disposition is **deprecate or quarantine**, not
+delete — see `reference/dead-code-playbook.md`.
 
 ```
-FILE:       path/to/file
-REASON:     Dead code | Duplicate | Test artifact | Deprecated | Generated
-IMPACT:     HIGH | MEDIUM | LOW   (what breaks if removed)
-CONFIDENCE: 100% safe | 95% safe | Needs review
-VALIDATION: <how to verify it is safe to remove>
+FILE:        path/to/file
+REASON:      Dead code | Duplicate | Test artifact | Deprecated | Generated
+IMPACT:      HIGH | MEDIUM | LOW   (what breaks if removed)
+DISPOSITION: leave | deprecate | quarantine | delete
+CONFIDENCE:  <tier + evidence; see reference/risk-framework.md>
+VALIDATION:  <how to verify it is safe to retire>
 ```
+
+Anything proposed at `DISPOSITION: delete` must show a 100% evidence checklist
+and a self-verification result; anything unverifiable stays at `leave` and is
+labelled *suspected-dead, unverified*.
 
 ## 3D · Code-quality metrics
 

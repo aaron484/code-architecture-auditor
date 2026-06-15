@@ -100,8 +100,9 @@ Each phase is a **gate** — it finishes and confirms before the next begins.
 
 ### The safety model
 
-Every proposed change is rated on **Impact** (Critical→Low) and **Confidence**
-(100%→<70%). The decision rules:
+Every proposed change is rated on **Impact** (Critical→Low) and a **Confidence**
+tier that must be *earned by an evidence checklist* (Unverified → Tentative →
+Strong → Verified), never asserted as a gut number. The decision rules:
 
 | Condition | Action |
 | --------- | ------ |
@@ -124,9 +125,11 @@ code-architecture-auditor/
 ├── NOTICE                        # Required attribution + commercial-contact notice
 ├── reference/                    # Progressive-disclosure detail
 │   ├── workflow.md               # 7 competencies + all 5 phases
-│   ├── risk-framework.md         # Impact × Confidence gate
+│   ├── risk-framework.md         # Impact × Confidence gate + self-verification
+│   ├── dead-code-playbook.md     # Deprecate-before-delete disposition ladder
 │   ├── report-sections.md        # Audit-report structure
-│   └── standards.md              # Quality bars + edge-case playbooks
+│   ├── standards.md              # Quality bars + edge-case playbooks
+│   └── security.md               # Safety preconditions + untrusted-input rule
 └── templates/                    # Fill-in deliverables
     ├── 1_AUDIT_REPORT.md
     ├── 2_IMPLEMENTATION_GUIDE.md
