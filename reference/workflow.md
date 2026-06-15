@@ -207,8 +207,15 @@ structure in `reference/report-sections.md`. Cover: executive summary, detailed
 findings (with severity), files recommended for removal, code-quality metrics,
 architecture assessment, dependency analysis, and prioritized recommendations.
 
-**Gate:** present findings; get explicit approval on what to change before
-Phase 4. If the user requested report-only, **stop here**.
+Before finalizing, run the **self-verification pass**
+(`reference/risk-framework.md`) on every **CRITICAL** finding and every
+proposed **delete** — try to disprove it, confirm the evidence still holds, and
+record the `VERIFIED:` result. A finding that fails the pass is downgraded or
+dropped, not shipped.
+
+**Gate:** every CRITICAL finding self-verified; present findings; get explicit
+approval on what to change before Phase 4. If the user requested report-only,
+**stop here**.
 
 ---
 
@@ -233,9 +240,13 @@ Apply only approved changes. Every change passes the risk gate
 - **4E · Configuration cleanup:** remove unused configs, consolidate duplicates,
   move secrets to `.env`, document all options, provide `.env.example`.
 
-Commit in atomic, clearly-messaged commits so any change can be reverted alone.
+Before applying any **delete** or **CRITICAL-impact** change, run the
+**self-verification pass** (`reference/risk-framework.md`) one last time on the
+exact change about to be made, and record the `VERIFIED:` result. Commit in
+atomic, clearly-messaged commits so any change can be reverted alone.
 
-**Gate:** each change validated; nothing CRITICAL changed below 100% confidence.
+**Gate:** each change validated and (for deletes/CRITICAL) self-verified;
+nothing CRITICAL changed below 100% confidence.
 
 ---
 

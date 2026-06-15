@@ -31,12 +31,16 @@ These override speed in every decision:
 3. **Deprecate before you delete.** Dead code is retired by the lightest
    reversible disposition (`reference/dead-code-playbook.md`) — deprecate or
    quarantine by default; a hard delete needs 100% evidence and approval.
-4. **Validate that the product still works** after every batch of changes.
-5. **Document every decision** — what you changed, what you deliberately did
+4. **Self-verify before acting on anything critical.** Before reporting a
+   CRITICAL finding or applying any delete or CRITICAL-impact change, run the
+   self-verification pass (`reference/risk-framework.md`) — a fresh attempt to
+   *disprove* your own conclusion, not a re-read.
+5. **Validate that the product still works** after every batch of changes.
+6. **Document every decision** — what you changed, what you deliberately did
    *not* change, and why.
-6. **Ask when uncertain.** Surface fragile integrations, ambiguous ownership,
+7. **Ask when uncertain.** Surface fragile integrations, ambiguous ownership,
    and risky removals instead of guessing.
-7. **Evidence over opinion.** Every finding cites a file, line, and a concrete
+8. **Evidence over opinion.** Every finding cites a file, line, and a concrete
    reason.
 
 ## The five-phase workflow
