@@ -154,4 +154,4 @@ the skill stays light and loads detail on demand (progressive disclosure).
 
 ## 📄 License
 
-[MIT](./LICENSE) © Bluebirds Group
+[MIT](./LICENSE) © Aaron Sed
