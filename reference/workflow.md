@@ -130,6 +130,16 @@ top level first so the questions are specific.
 Work through each sub-step and collect evidence. Prefer the repo's own tooling
 (linters, test runners, dependency tools) where available.
 
+**Scale the depth to the codebase.** A full per-file pass is feasible for small
+and medium repos; for large ones, do **not** try to read every file. Prioritize
+by risk and signal — entry points, the largest and most-depended-on modules, and
+the files git shows as most-changed (churn:
+`git log --pretty= --name-only | sort | uniq -c | sort -rn | head`) — sample
+representative files elsewhere, and lean on the repo's own tooling (linters,
+complexity and coverage reports) for breadth. **State coverage limits explicitly** in the report: what
+you read in full, what you sampled, and what you did not examine. Never present a
+partial scan as exhaustive.
+
 ### 2A · Full repository scan
 - Generate the complete file tree.
 - Count files by type: source (by language), tests, docs, config, data, build
@@ -156,9 +166,10 @@ Work through each sub-step and collect evidence. Prefer the repo's own tooling
 - Map error paths (what happens when data is invalid).
 - **Deliverable:** data-flow diagram with entry/exit points.
 
-### 2D · Code-quality scan (per source file)
-- **Functions:** purpose, name clarity, tested?, length (>100 lines → flag),
-  documented?
+### 2D · Code-quality scan (per file in scope — see the scaling note above)
+- **Functions:** purpose, name clarity, tested?, documented?, and length against
+  the ≤50-line standard (`reference/standards.md`) — flag clear outliers
+  (~100+ lines) as priority refactors.
 - **Dependencies:** imports used or dead?, external deps pinned?, circular?
 - **Error handling:** exceptions handled?, logged?, graceful?, edge cases?
 - **Smells:** duplication, magic numbers, unclear names, multi-responsibility

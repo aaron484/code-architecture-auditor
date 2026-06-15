@@ -30,7 +30,9 @@ that come up mid-audit.
 - Coverage ≥ 80% for core logic.
 
 ### Configuration
-- Secrets never in code — use `.env`.
+- Secrets never in code — use `.env`. Secrets already committed must be
+  **rotated**, not just relocated — git history keeps the old value
+  (`reference/security.md`).
 - Environment-specific configs separated (dev/staging/prod).
 - All config options documented.
 - `.env.example` provided as a template.
