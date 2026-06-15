@@ -23,8 +23,10 @@ baseline, assessing risk, and validating that the product still works.
   handling, test coverage, docs.
 - **Maps dependencies** — import graphs, circular deps, external integrations,
   version pinning.
-- **Finds dead code safely** — every removal is grep-verified, git-checked, and
-  risk-rated before it's touched.
+- **Finds dead code safely** — candidates are checked against false-positive
+  traps (reflection, DI, entry points, public API), then deprecated or
+  quarantined before any delete; nothing is deleted below 100% (Verified)
+  confidence.
 - **Refactors with a safety net** — an Impact × Confidence gate blocks any risky
   change; CRITICAL code is never changed below 100% confidence.
 - **Validates against a baseline** — output must match before sign-off.

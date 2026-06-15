@@ -36,15 +36,22 @@ EFFORT:         <1 hour | 1 day | 1 week>
 
 ---
 
-## 3. Files recommended for removal
+## 3. Files recommended for retirement
+
+<!-- Default disposition is deprecate or quarantine, not delete — see reference/dead-code-playbook.md. -->
 
 ```
-FILE:       <path>
-REASON:     <Dead code | Duplicate | Test artifact | Deprecated | Generated>
-IMPACT:     <HIGH | MEDIUM | LOW>
-CONFIDENCE: <100% safe | 95% safe | Needs review>
-VALIDATION: <how to verify>
+FILE:        <path>
+REASON:      <Dead code | Duplicate | Test artifact | Deprecated | Generated>
+IMPACT:      <HIGH | MEDIUM | LOW — what breaks if removed>
+DISPOSITION: <leave | deprecate | quarantine | delete>
+CONFIDENCE:  <Unverified | Tentative | Strong | Verified — list ticked evidence; see reference/risk-framework.md>
+VALIDATION:  <how to verify it is safe to retire>
 ```
+
+> `DISPOSITION: delete` requires a Verified (100%) evidence checklist plus a
+> self-verification pass. Anything unverifiable stays at `leave`, labelled
+> *suspected-dead, unverified*.
 
 ---
 
