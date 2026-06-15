@@ -218,7 +218,7 @@ Phase 4.
 
 Produce `1_AUDIT_REPORT.md` using `templates/1_AUDIT_REPORT.md` and the
 structure in `reference/report-sections.md`. Cover: executive summary, detailed
-findings (with severity), files recommended for removal, code-quality metrics,
+findings (with severity), files recommended for retirement, code-quality metrics,
 architecture assessment, dependency analysis, and prioritized recommendations.
 
 Before finalizing, run the **self-verification pass**
