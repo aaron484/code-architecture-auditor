@@ -51,32 +51,42 @@ These override speed in every decision:
 
 Phases are **sequential gates**, not time estimates — finish and confirm each
 before advancing. Full detail for each phase, including the exact checks and
-deliverables, lives in `reference/workflow.md`. Read it before starting Phase 2.
+deliverables, lives in `reference/workflow.md`. Read it before you begin Phase 1
+— Discovery is where precision matters most.
 
 | Phase | Goal | Gate to advance |
 | ----- | ---- | --------------- |
 | **1 · Discovery** | Gather repo access, project context, output baseline, known issues, constraints | User confirms the context document |
-| **2 · Analysis** | Repo scan, structure, data flow, quality, dependencies, dead code, baseline capture | Findings are evidence-backed and complete |
+| **2 · Analysis** | Repo scan, structure, data flow, quality, dependencies, dead code, baseline capture | Findings evidence-backed and complete; baseline captured (required before any refactor) |
 | **3 · Reporting** | Produce the audit report with severities, metrics, removal candidates | User reviews findings & approves scope |
 | **4 · Refactoring** | Apply only approved changes: safe removals, consolidation, structure, docs, config | Each change passes the risk gate + validation |
 | **5 · Validation** | Run tests, compare output to baseline, check performance, final sign-off | Output matches baseline; checklist complete |
 
 ## How to begin
 
-When this skill activates, do the following:
+When this skill activates:
 
-1. Post the readiness confirmation (see `reference/workflow.md` → "Readiness
+1. **Post the readiness confirmation** (see `reference/workflow.md` → "Readiness
    block").
-2. Run **Phase 1 — Discovery**: ask the user the five discovery question groups
-   (repository access, project context, output baseline, known issues,
-   constraints). Do not assume answers.
-3. If a repository path or URL is already provided, scan its top-level structure
-   first so your discovery questions are specific to *their* code, not generic.
-4. Produce a structured **context document** and get explicit confirmation
-   before any analysis.
-
-> If the user only wants a read-only assessment (Phases 1–3) and not refactoring,
-> honor that — stop after the report and present the prioritized recommendations.
+2. **Establish the mode.** Default to **report-only** — analysis and prioritized
+   recommendations, no code changes — unless the user asks you to *clean up*,
+   *refactor*, or *fix* the code. Report-only is read-only and safe, so it needs
+   **no** branch, clean working tree, or captured baseline. Don't impose
+   refactor ceremony on a request for a report.
+3. **Scan first, ask little.** If a path or URL is available, scan the top-level
+   structure *before* asking anything. Then confirm only the few things that
+   shape a useful report: what the project does, where its output goes / how
+   correctness is judged, and any known pain points or files that must not be
+   touched. State your assumptions and proceed — never block the user behind a
+   long questionnaire.
+4. **Produce the audit report** (Phases 2–3) and present prioritized
+   recommendations.
+5. **Only if the user approves code changes** do you enter refactor mode: now
+   complete the refactor-only discovery (full output baseline + constraints) and
+   the **Phase 4 entry gate** — clean tree, dedicated `audit/<scope>` branch,
+   recoverable git history, captured baseline — before touching a file
+   (`reference/security.md`). If the repo isn't under git, or no baseline can be
+   established, say so and stay report-only until that's resolved.
 
 ## Reference material (load as needed)
 
@@ -97,7 +107,9 @@ When this skill activates, do the following:
 ## Deliverables
 
 Produce these as files in an audit output folder (default
-`./<project>-audit/`). Templates are in `templates/`:
+`./<project>-audit/`; add that folder to the audited repo's `.gitignore` so the
+audit doesn't dirty the working tree it asks you to keep clean). Templates are in
+`templates/`:
 
 1. `1_AUDIT_REPORT.md` — findings, metrics, health score, prioritized recs.
 2. Refactored code — committed in clear, atomic commits (only if approved).
