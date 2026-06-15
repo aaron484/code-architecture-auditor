@@ -68,7 +68,9 @@ Starting Phase 1 — Discovery.
 - Run validation tests if available.
 
 ### 6. Cleanup & refactoring
-- Remove dead code with documented justification.
+- Retire dead code via the dead-code playbook
+  (`reference/dead-code-playbook.md`): **deprecate or quarantine before delete**,
+  with documented justification.
 - Consolidate duplicate logic.
 - Fix naming inconsistencies.
 - Improve folder structure.
@@ -170,14 +172,20 @@ Work through each sub-step and collect evidence. Prefer the repo's own tooling
 - **Deliverable:** dependency graph (text or diagram).
 
 ### 2F · Dead-code detection
-Confirm each candidate with a codebase-wide search before flagging:
+A symbol with no obvious caller is a **candidate, not a verdict.** Confirm each
+with a codebase-wide search and rule out the false-positive traps in
+`reference/dead-code-playbook.md` (dynamic dispatch, config/registry loading,
+external entry points, public API, framework conventions, generated code)
+before flagging it. Detection never removes anything — disposition happens in
+Phase 4.
 - Unused files (nothing imports/requires them; truly dead via grep).
 - Unused functions (never called; not a test-only helper).
 - Unused variables, parameters, and imports.
 - Duplicate code that should be extracted.
 - Commented-out code (belongs in git history).
 - Deprecated patterns (v1/v2/v3 forks, `@deprecated`, replaced legacy).
-- **Deliverable:** dead-code inventory (file → code → risk level).
+- **Deliverable:** dead-code inventory (file → code → suspected disposition →
+  risk level), marking anything unverifiable as *suspected-dead, unverified*.
 
 ### 2G · Output-validation setup (establish the baseline)
 - Identify output format and capture an example + expected schema.
@@ -209,8 +217,12 @@ Phase 4. If the user requested report-only, **stop here**.
 Apply only approved changes. Every change passes the risk gate
 (`reference/risk-framework.md`) and is validated before moving on.
 
-- **4A · Safe file removal:** final confidence check (`grep -r` the name,
-  `git log --all -- <file>`, `.gitignore`), remove, run validation, document.
+- **4A · Safe dead-code retirement:** follow `reference/dead-code-playbook.md`.
+  Run the final evidence check (`grep -r` the name, `git log --all -- <file>`,
+  `.gitignore`, dynamic-reference traps), then pick the **lightest reversible
+  disposition** — deprecate-in-place or quarantine by default; delete only at
+  100% confidence, self-verified, and approved. One removal per commit; run
+  validation; document the disposition.
 - **4B · Consolidation:** identify all instances → create shared
   function/module → update references → delete duplicates → confirm identical
   behavior.

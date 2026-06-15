@@ -33,6 +33,7 @@ The content is deliberately split so the skill loads light and pulls detail on d
 - `reference/*.md` — the heavy detail, loaded only when needed:
   - `workflow.md` — the readiness block, 7 competencies, and all 5 phases in full.
   - `risk-framework.md` — the Impact × Confidence gate that governs every change.
+  - `dead-code-playbook.md` — the deprecate-before-delete disposition ladder and dead-code false-positive traps.
   - `report-sections.md` — exact audit-report layout and finding/removal block formats.
   - `standards.md` — quality bars + edge-case playbooks.
 - `templates/{1_AUDIT_REPORT,2_IMPLEMENTATION_GUIDE,3_CLEANUP_CHECKLIST,4_VALIDATION_RESULTS}.md`

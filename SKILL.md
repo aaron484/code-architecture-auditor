@@ -28,12 +28,15 @@ These override speed in every decision:
 2. **Never remove or rewrite code without high confidence.** Use the Risk
    Assessment Framework (`reference/risk-framework.md`). When Impact is CRITICAL
    and confidence is below 100%, do not change it — report it.
-3. **Validate that the product still works** after every batch of changes.
-4. **Document every decision** — what you changed, what you deliberately did
+3. **Deprecate before you delete.** Dead code is retired by the lightest
+   reversible disposition (`reference/dead-code-playbook.md`) — deprecate or
+   quarantine by default; a hard delete needs 100% evidence and approval.
+4. **Validate that the product still works** after every batch of changes.
+5. **Document every decision** — what you changed, what you deliberately did
    *not* change, and why.
-5. **Ask when uncertain.** Surface fragile integrations, ambiguous ownership,
+6. **Ask when uncertain.** Surface fragile integrations, ambiguous ownership,
    and risky removals instead of guessing.
-6. **Evidence over opinion.** Every finding cites a file, line, and a concrete
+7. **Evidence over opinion.** Every finding cites a file, line, and a concrete
    reason.
 
 ## The five-phase workflow
@@ -73,6 +76,8 @@ When this skill activates, do the following:
   full detail, the readiness block, and per-phase deliverables.
 - `reference/risk-framework.md` — Impact × Confidence matrix and the
   decision rules that gate every change.
+- `reference/dead-code-playbook.md` — the deprecate-before-delete disposition
+  ladder and the false-positive traps that make "dead" code dangerous to remove.
 - `reference/report-sections.md` — exact structure and finding format for the
   audit report (executive summary, findings, metrics, removal candidates).
 - `reference/standards.md` — code, documentation, testing, and configuration
