@@ -5,7 +5,7 @@
 > production-ready report plus clean, validated code.
 
 [![Skill](https://img.shields.io/badge/Claude-Skill-7C3AED)](https://docs.claude.com/en/docs/claude-code/skills)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/License-PolyForm%20Noncommercial-orange.svg)](./LICENSE)
 [![Scope](https://img.shields.io/badge/scope-language--agnostic-blue)]()
 
 The Code Architecture Auditor turns Claude into a **Senior Architecture, Code
@@ -120,7 +120,8 @@ Full detail in [`reference/risk-framework.md`](./reference/risk-framework.md).
 code-architecture-auditor/
 ├── SKILL.md                      # Skill definition (frontmatter + summary)
 ├── README.md                     # This file
-├── LICENSE                       # MIT
+├── LICENSE                       # PolyForm Noncommercial 1.0.0
+├── NOTICE                        # Required attribution + commercial-contact notice
 ├── reference/                    # Progressive-disclosure detail
 │   ├── workflow.md               # 7 competencies + all 5 phases
 │   ├── risk-framework.md         # Impact × Confidence gate
@@ -147,11 +148,50 @@ For each audit, the skill generates (in a `./<project>-audit/` folder):
 
 ---
 
+## 🔒 Ownership, usage & commercial licensing
+
+This project is **source-available, not public-domain.** Copyright is retained
+by the author — using it does **not** transfer ownership.
+
+**To use it the right way:**
+
+1. **Fork this repository** (don't just copy the files). Forking keeps the
+   attribution and licence intact and links your copy back to the original — it
+   is the supported way to use, adapt, and build on the skill.
+2. **Keep the `Required Notice` line** from [`LICENSE`](./LICENSE) and the
+   [`NOTICE`](./NOTICE) file in any copy or derivative.
+3. **Non-commercial use is free** under the
+   [PolyForm Noncommercial 1.0.0](./LICENSE) licence — personal projects,
+   learning, research, evaluation, and non-profit/education/government use.
+
+**Commercial use requires a separate paid licence.** Any use with an
+anticipated commercial application — using it in a paid product, in a for-profit
+company's workflow, or reselling/bundling it — is **not** covered by the free
+licence. To obtain a commercial licence, contact:
+
+> 📧 **aaron@bluebirdsgroup.com**
+
+> ⚠️ **Note on enforcement:** a public repository can be cloned or downloaded by
+> anyone, and the licence — not GitHub — is what governs ownership and rights.
+> Forks are visible to the author (see **Insights → Forks**); clones are not.
+> The licence terms apply regardless of how a copy was obtained.
+
+---
+
 ## 🤝 Contributing
 
-Issues and PRs welcome. Keep `SKILL.md` concise — put detail in `reference/` so
-the skill stays light and loads detail on demand (progressive disclosure).
+Contributions are welcome under the **fork-and-pull-request** model:
+
+1. Fork the repo.
+2. Make your changes on a branch.
+3. Open a pull request back to this repository.
+
+By submitting a PR you agree your contribution is licensed under the same
+PolyForm Noncommercial terms. Keep `SKILL.md` concise — put detail in
+`reference/` so the skill stays light and loads detail on demand (progressive
+disclosure).
 
 ## 📄 License
 
-[MIT](./LICENSE) © Aaron Sed
+[PolyForm Noncommercial 1.0.0](./LICENSE) · Copyright © 2026 **Aaron Sed** ·
+Commercial licensing: **aaron@bluebirdsgroup.com**
