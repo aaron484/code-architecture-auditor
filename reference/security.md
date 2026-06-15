@@ -83,9 +83,13 @@ strings:
 
 ## Where these rules bind
 
-- **Phase 1 (Discovery):** establish the audit branch and confirm a clean tree
-  and recoverable history as part of repository-access setup.
-- **Phase 4 (Refactoring):** the preconditions above are the entry gate; every
-  change is diff-first and atomic.
+- **Phase 1 (Discovery):** *note* whether the repo is under git, whether the
+  tree is clean, and whether history is recoverable — and flag any gap. The
+  audit branch and clean-tree requirement are needed only when you move to
+  changing code (the Phase 4 gate below), **not** to start a read-only audit.
+- **Phase 4 (Refactoring):** the preconditions above are the entry gate —
+  clean tree, dedicated `audit/<scope>` branch, recoverable history, captured
+  baseline, all four before touching a file; every change is diff-first and
+  atomic.
 - **Always:** the untrusted-input and secrets rules apply the moment you start
   reading the repo, in every phase.

@@ -44,7 +44,7 @@ level** (shared with a repo via version control).
 ### Option A — user-level (recommended)
 
 ```bash
-git clone https://github.com/<your-org>/code-architecture-auditor.git
+git clone https://github.com/aaron484/code-architecture-auditor.git
 mkdir -p ~/.claude/skills
 cp -R code-architecture-auditor ~/.claude/skills/code-architecture-auditor
 ```
@@ -79,12 +79,15 @@ Invoke it explicitly:
 - "Is this project production-ready? Give me a health report."
 - "Clean up and refactor this service safely."
 
-It will confirm readiness, then ask the **Phase 1 — Discovery** questions
-(repository, context, output baseline, known issues, constraints) before doing
-anything.
+It confirms readiness, scans the repo, and asks a few targeted questions before
+producing the report. A **report-only** audit is the **default** — it's read-only
+and low-friction, so it won't make you set up branches or baselines. Only when
+you ask it to **refactor** does it switch on the full safety gate (dedicated
+branch, captured baseline, approval per change).
 
-> **Tip:** Want analysis only, no code changes? Say *"report only."* It stops
-> after the audit report with prioritized recommendations.
+> **Tip:** Want changes applied, not just findings? Say *"clean it up"* or
+> *"refactor it safely."* Otherwise it stays report-only and hands you the audit
+> report with prioritized recommendations.
 
 ---
 
@@ -132,11 +135,15 @@ code-architecture-auditor/
 │   ├── report-sections.md        # Audit-report structure
 │   ├── standards.md              # Quality bars + edge-case playbooks
 │   └── security.md               # Safety preconditions + untrusted-input rule
-└── templates/                    # Fill-in deliverables
-    ├── 1_AUDIT_REPORT.md
-    ├── 2_IMPLEMENTATION_GUIDE.md
-    ├── 3_CLEANUP_CHECKLIST.md
-    └── 4_VALIDATION_RESULTS.md
+├── templates/                    # Fill-in deliverables
+│   ├── 1_AUDIT_REPORT.md
+│   ├── 2_IMPLEMENTATION_GUIDE.md
+│   ├── 3_CLEANUP_CHECKLIST.md
+│   └── 4_VALIDATION_RESULTS.md
+├── .gitignore
+└── .claude/                      # Dev-only: the run-code-architecture-auditor
+                                  # validation skill (smoke-tests this repo).
+                                  # Not needed to *use* the auditor.
 ```
 
 ---

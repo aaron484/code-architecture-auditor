@@ -27,7 +27,9 @@ that come up mid-audit.
 - All public functions tested.
 - Edge cases and error conditions covered.
 - Tests are isolated (no interdependencies) with clear names.
-- Coverage ≥ 80% for core logic.
+- Coverage ≥ 80% for core logic. *(If the project has no test suite, report
+  coverage as `n/a` and raise the absence itself as a finding — don't score the
+  project against a bar it can't meet.)*
 
 ### Configuration
 - Secrets never in code — use `.env`. Secrets already committed must be

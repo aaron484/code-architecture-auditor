@@ -57,6 +57,10 @@ VALIDATION:  <how to verify it is safe to retire>
 
 ## 4. Code-quality metrics
 
+<!-- Fill real measured numbers. If a metric can't be measured (e.g. no test
+     suite), write `n/a` and say why — never invent a number. See
+     reference/report-sections.md. -->
+
 ```
 Metric                          Current    Target    Status
 ─────────────────────────────────────────────────────────

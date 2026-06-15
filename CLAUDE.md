@@ -48,8 +48,20 @@ reference file, update the pointer.
 The skill's own runtime behavior is a **five-phase sequential gate** model
 (Discovery → Analysis → Reporting → Refactoring → Validation), where it must establish
 an output baseline before changing anything and never alter CRITICAL-impact code below
-100% confidence. If you edit `workflow.md` or `risk-framework.md`, keep this safety
-model internally consistent with the gate table in `SKILL.md`.
+100% confidence.
+
+**The safety model is the load-bearing contract, and it spans more than one file.**
+It has two halves — the *evidence ladder* (confidence is earned tier-by-tier:
+Unverified → Tentative → Strong → Verified, never a gut percentage) and
+*deprecate-before-delete* (leave → deprecate → quarantine → delete). These must read
+identically everywhere they appear: the principles in `SKILL.md`, the gate table in
+`SKILL.md`, `reference/risk-framework.md`, `reference/dead-code-playbook.md`,
+`reference/report-sections.md`, the emitted `templates/`, and the marketing copy in
+`README.md`. The most common regression in this repo is editing the model in one place
+(usually a reference doc) and leaving a template or the README describing the *old*
+model — e.g. a template still emitting `CONFIDENCE: <100% safe | 95% safe>` after the
+docs moved to the evidence ladder. When you touch the safety model, grep all surfaces
+and update them together (see Consistency checks below).
 
 ## Licensing & identity constraints (do not casually change)
 
@@ -68,19 +80,33 @@ author's commercial rights. When editing, respect these:
 ## Git / publishing
 
 - Remote: `https://github.com/aaron484/code-architecture-auditor` (public).
-- Commits must be authored as **Aaron Sed**. If author identity drifts, re-stamp with:
-  `git rebase --root --exec 'git commit --amend --reset-author --no-edit'` (only on
-  unpushed commits).
+- The **maintainer's** commits must be authored as **Aaron Sed**. *Maintainer-only,
+  and only on unpushed commits:* if the maintainer's own author identity drifts,
+  re-stamp with `git rebase --root --exec 'git commit --amend --reset-author --no-edit'`.
+  **Contributors keep their own authorship** — never rewrite history to change
+  someone else's commits, and never run the re-stamp on a fork or a shared branch.
 - Use `gh` for repo/topic management. Only commit or push when the user asks.
 
-## Validating a change to the skill
+## Consistency checks (this repo's substitute for build/lint/test)
 
-There is no test suite. To verify edits actually work:
+There is no build, linter, or test suite — the "tests" are structural invariants.
+Run these from the repo root after any content edit:
 
-1. Confirm `SKILL.md` frontmatter still has valid `name` + `description` and the folder
-   name matches `name`.
-2. Confirm every path referenced in `SKILL.md` exists (`reference/`, `templates/`).
-3. Install into `~/.claude/skills/`, restart Claude Code, and run
-   `/code-architecture-auditor` (or a natural prompt like "audit this repo") — it should
-   post the readiness block and then ask the Phase 1 discovery questions before doing
-   anything.
+```bash
+# 1 · Folder name must equal the `name:` in SKILL.md frontmatter, or the skill won't load.
+basename "$PWD"; grep -m1 '^name:' SKILL.md
+
+# 2 · Every reference/ path pointed to from SKILL.md must exist (a dangling pointer = a
+#     reference file that never loads).
+grep -oE 'reference/[A-Za-z0-9_-]+\.md' SKILL.md | sort -u | \
+  while read -r f; do test -f "$f" && echo "ok       $f" || echo "MISSING  $f"; done
+
+# 3 · Safety-model regression guard: the old gut-percentage wording must be gone
+#     everywhere. This should print nothing.
+git grep -n "% safe" -- templates reference README.md
+```
+
+Then the manual smoke test: install into `~/.claude/skills/`, restart Claude Code, and
+run `/code-architecture-auditor` (or a natural prompt like "audit this repo"). It should
+post the readiness block and then ask the Phase 1 discovery questions before doing
+anything — it must **not** start scanning or changing files on its own.

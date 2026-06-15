@@ -5,7 +5,7 @@
 ## Test results
 - Suite: <command run>
 - Result: <N passed / N failed / N skipped>
-- Coverage: <before>% → <after>% (must not decrease)
+- Coverage: <before>% → <after>% (must not decrease; `n/a` if the project has no test suite)
 - Notes: <anything flaky or skipped, with reason>
 
 ## Output comparison
