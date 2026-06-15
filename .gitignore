@@ -1,0 +1,9 @@
+# Audit output generated when the skill runs against a project
+*-audit/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
